@@ -1,1 +1,1 @@
-# NodeJS+Express+MongoDB application for storing video clips.
+# NodeJS+Express+MongoDB  CRUD application for practice.
