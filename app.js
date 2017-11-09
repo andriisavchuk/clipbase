@@ -1,9 +1,20 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const mongoose = require('mongoose');
 
 
 // Set up express application const
 const app = express();
+
+// Map global promise
+mongoose.Promise = global.Promise;
+
+// Connect to Mongoose
+mongoose.connect('mongodb://localhost/clipbase', {
+  useMongoClient: true
+})
+  .then(() => console.log('MongoDB Connected...'))
+  .catch(err => console.log(err));
 
 // Set up Handlebars Middleware
 app.engine('handlebars', exphbs({
