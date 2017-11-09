@@ -16,6 +16,10 @@ mongoose.connect('mongodb://localhost/clipbase', {
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
+// Load Clip Model
+require('./models/Clip');
+const Clip = mongoose.model('clips');
+
 // Set up Handlebars Middleware
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
