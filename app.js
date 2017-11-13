@@ -56,22 +56,22 @@ app.post('/clips', (req, res) => {
   let errors = [];
 
   if (!req.body.title) {
-    errors.push({text: 'Please add a title'});
+    errors.push({ text: 'Please add a title' });
   }
   if (!req.body.description) {
-    errors.push({text: 'Please add some description'});
+    errors.push({ text: 'Please add some description' });
   }
   if (!req.body.style) {
-    errors.push({text: 'Please add style of the clip'});
+    errors.push({ text: 'Please add style of the clip' });
   }
   if (!req.body.director) {
-    errors.push({text: 'Please add directors Name'});
+    errors.push({ text: 'Please add directors Name' });
   }
   if (!req.body.duration) {
-    errors.push({text: 'Please add desired duration of the clip'});
+    errors.push({ text: 'Please add desired duration of the clip' });
   }
 
-  if(errors.length > 0) {
+  if (errors.length > 0) {
     res.render('clips/add', {
       errors: errors,
       title: req.body.title,
@@ -81,7 +81,19 @@ app.post('/clips', (req, res) => {
       duration: req.body.duration
     });
   } else {
-    res.send('passed');
+    // Add data to database
+    const newClip = {
+      title: req.body.title,
+      description: req.body.description,
+      style: req.body.style,
+      director: req.body.director,
+      duration: req.body.duration
+    }
+    new Clip(newClip)
+      .save()
+      .then(clip => {
+        res.redirect('/clips');
+      })
   }
 });
 
