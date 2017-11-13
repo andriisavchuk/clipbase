@@ -53,7 +53,36 @@ app.get('/clips/add', (req, res) => {
 
 //Process Form
 app.post('/clips', (req, res) => {
-  res.send('ok');
+  let errors = [];
+
+  if (!req.body.title) {
+    errors.push({text: 'Please add a title'});
+  }
+  if (!req.body.description) {
+    errors.push({text: 'Please add some description'});
+  }
+  if (!req.body.style) {
+    errors.push({text: 'Please add style of the clip'});
+  }
+  if (!req.body.director) {
+    errors.push({text: 'Please add directors Name'});
+  }
+  if (!req.body.duration) {
+    errors.push({text: 'Please add desired duration of the clip'});
+  }
+
+  if(errors.length > 0) {
+    res.render('clips/add', {
+      errors: errors,
+      title: req.body.title,
+      description: req.body.description,
+      style: req.body.style,
+      director: req.body.director,
+      duration: req.body.duration
+    });
+  } else {
+    res.send('passed');
+  }
 });
 
 // Set up port
