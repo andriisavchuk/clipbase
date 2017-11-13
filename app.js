@@ -9,7 +9,7 @@ const app = express();
 // Map global promise
 mongoose.Promise = global.Promise;
 
-// Connect to Mongoose
+// Connect to MongoDB
 mongoose.connect('mongodb://localhost/clipbase', {
   useMongoClient: true
 })
@@ -37,6 +37,11 @@ app.get('/', (req, res) => {
 // Set up About Route
 app.get('/about', (req, res) => {
   res.render('about');
+});
+
+// Set up Clip Form
+app.get('/clips/add', (req, res) => {
+  res.render('clips/add');
 });
 
 // Set up port
