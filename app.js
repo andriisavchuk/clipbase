@@ -1,5 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 
@@ -26,6 +27,12 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
+// Parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// Parse application/json
+app.use(bodyParser.json())
+
 // Set up Index Route
 app.get('/', (req, res) => {
   const title = 'Welcome to my NodeJS App';
@@ -42,6 +49,11 @@ app.get('/about', (req, res) => {
 // Set up Clip Form
 app.get('/clips/add', (req, res) => {
   res.render('clips/add');
+});
+
+//Process Form
+app.post('/clips', (req, res) => {
+  res.send('ok');
 });
 
 // Set up port
