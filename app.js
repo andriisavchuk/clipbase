@@ -51,6 +51,18 @@ app.get('/clips/add', (req, res) => {
   res.render('clips/add');
 });
 
+// Edit Clip Form
+app.get('/clips/edit/:id', (req, res) => {
+  Clip.findOne({
+    _id: req.params.id
+  })
+  .then(clip => {
+    res.render('clips/edit', {
+      clip
+    })
+  });
+});
+
 // Set up Clip Route
 app.get('/clips', (req, res) => {
   Clip.find({})
