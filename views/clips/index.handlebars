@@ -1,0 +1,11 @@
+{{#each clips}}
+  <div class="card card-body mb-2">
+    <h3>{{title}}</h3>
+    <p>{{description}}</p>
+    <h4>{{style}}</h4>
+    <h5>{{director}}</h5>
+    <h6>{{duration}}<span> seconds</span></h6>
+  </div>
+{{else}}
+  <p>Sorry, there are no any data in ClipBase</p>
+{{/each}}

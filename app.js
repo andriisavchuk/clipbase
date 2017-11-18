@@ -51,6 +51,17 @@ app.get('/clips/add', (req, res) => {
   res.render('clips/add');
 });
 
+// Set up Clip Route
+app.get('/clips', (req, res) => {
+  Clip.find({})
+    .sort({date: 'desc'})
+    .then(clips => {
+      res.render('clips/index', {
+        clips
+      });
+    })
+});
+
 //Process Form
 app.post('/clips', (req, res) => {
   let errors = [];
