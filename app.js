@@ -1,10 +1,11 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 
-// Set up express application const
+// Set express application const
 const app = express();
 
 // Map global promise
@@ -21,7 +22,7 @@ mongoose.connect('mongodb://localhost/clipbase', {
 require('./models/Clip');
 const Clip = mongoose.model('clips');
 
-// Set up Handlebars Middleware
+// Handlebars Middleware
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
 }));
@@ -33,7 +34,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // Parse application/json
 app.use(bodyParser.json())
 
-// Set up Index Route
+// Method-override Middleware
+app.use(methodOverride('_method'));
+
+// Index Route
 app.get('/', (req, res) => {
   const title = 'Welcome to my NodeJS App';
   res.render('index', {
@@ -41,12 +45,12 @@ app.get('/', (req, res) => {
   });
 });
 
-// Set up About Route
+// About Route
 app.get('/about', (req, res) => {
   res.render('about');
 });
 
-// Set up Clip Form
+// Clip Form
 app.get('/clips/add', (req, res) => {
   res.render('clips/add');
 });
@@ -63,7 +67,7 @@ app.get('/clips/edit/:id', (req, res) => {
   });
 });
 
-// Set up Clip Route
+// Clip Route
 app.get('/clips', (req, res) => {
   Clip.find({})
     .sort({date: 'desc'})
@@ -74,7 +78,7 @@ app.get('/clips', (req, res) => {
     })
 });
 
-//Process Form
+// Process Form
 app.post('/clips', (req, res) => {
   let errors = [];
 
@@ -120,7 +124,27 @@ app.post('/clips', (req, res) => {
   }
 });
 
-// Set up port
+// Edit form process
+app.put('/clips/:id', (req, res) => {
+  Clip.findOne({
+    _id: req.params.id
+  })
+  .then(clip => {
+    // adding new values
+    clip.title = req.body.title;
+    clip.description = req.body.description;
+    clip.style = req.body.style;
+    clip.director = req.body.director;
+    clip.duration = req.body.duration;
+
+    clip.save()
+      .then(clip => {
+        res.redirect('/clips');
+      })
+  });
+});
+
+// Set Port
 const port = process.env.port || 3000;
 
 // Listening of the requests
