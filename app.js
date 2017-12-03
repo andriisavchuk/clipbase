@@ -49,6 +49,7 @@ app.use(session({
 // Fash Middleware
 app.use(flash());
 
+// Global Variables for Flash messages
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
@@ -139,6 +140,7 @@ app.post('/clips', (req, res) => {
     new Clip(newClip)
       .save()
       .then(clip => {
+        req.flash('success_msg', 'Clip information added');
         res.redirect('/clips');
       })
   }
@@ -159,6 +161,7 @@ app.put('/clips/:id', (req, res) => {
 
     clip.save()
       .then(clip => {
+        req.flash('success_msg', 'Clip information updated');
         res.redirect('/clips');
       })
   });
@@ -168,6 +171,7 @@ app.put('/clips/:id', (req, res) => {
 app.delete('/clips/:id', (req, res) => {
   Clip.remove({_id: req.params.id})
     .then(() => {
+      req.flash('success_msg', 'Clip information removed');
       res.redirect('/clips');
     });
 });
