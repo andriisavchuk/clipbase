@@ -144,6 +144,14 @@ app.put('/clips/:id', (req, res) => {
   });
 });
 
+// Delete Clip
+app.delete('/clips/:id', (req, res) => {
+  Clip.remove({_id: req.params.id})
+    .then(() => {
+      res.redirect('/clips');
+    });
+});
+
 // Set Port
 const port = process.env.port || 3000;
 

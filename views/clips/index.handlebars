@@ -2,10 +2,14 @@
   <div class="card card-body mb-2">
     <h3>{{title}}</h3>
     <p>{{description}}</p>
-    <a href="/clips/edit/{{id}}" class="btn btn-dark btn-block">Edit</a>
     <h4>{{style}}</h4>
     <h5>{{director}}</h5>
     <h6>{{duration}}<span> seconds</span></h6>
+    <a href="/clips/edit/{{id}}" class="btn btn-dark btn-block">Edit</a>
+    <form method="post" action="/clips/{{id}}?_method=DELETE">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" class="btn btn-danger btn-block mt-2" value="Delete">
+    </form>
   </div>
 {{else}}
   <p>Sorry, there are no any data in ClipBase</p>
