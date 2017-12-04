@@ -58,17 +58,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// About Route
+app.get('/about', (req, res) => {
+  res.render('about');
+});
+
 // Index Route
 app.get('/', (req, res) => {
   const title = 'Welcome to my NodeJS App';
   res.render('index', {
     title
   });
-});
-
-// About Route
-app.get('/about', (req, res) => {
-  res.render('about');
 });
 
 // Clip Form
@@ -174,6 +174,16 @@ app.delete('/clips/:id', (req, res) => {
       req.flash('success_msg', 'Clip information removed');
       res.redirect('/clips');
     });
+});
+
+// User Login Route
+app.get('/users/login', (req, res) => {
+  res.send('Login');
+});
+
+// User Registration Route
+app.get('/users/registration', (req, res) => {
+  res.send('Registration');
 });
 
 // Set Port
