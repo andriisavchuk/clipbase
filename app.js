@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // Set express application const
@@ -30,10 +30,10 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 
 // Parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }))
 
 // Parse application/json
-app.use(bodyParser.json())
+app.use(express.json())
 
 // Method-override Middleware
 app.use(methodOverride('_method'));
