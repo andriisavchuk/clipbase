@@ -1,5 +1,3 @@
-import { error } from 'util';
-
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
@@ -19,7 +17,7 @@ router.post('/registration', (req, res) => {
   let errors = [];
 
   if (req.body.password != req.body.password2) {
-      errors.push({text: 'Passwords do not match'});
+    errors.push({text: 'Passwords do not match'});
   }
 
   if (req.body.password.length < 4) {
