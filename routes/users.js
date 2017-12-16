@@ -12,4 +12,13 @@ router.get('/registration', (req, res) => {
   res.render('users/registration');
 });
 
+// Registration Form POST
+router.post('/registration', (req, res) => {
+  let errors = [];
+
+  if (req.body.password) {
+
+  }
+});
+
 module.exports = router;

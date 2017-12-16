@@ -4,11 +4,12 @@
   "description": "nodejs practice application with CRUD functionality",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "author": "Andrii S",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
     "express": "^4.16.2",
