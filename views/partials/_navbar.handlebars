@@ -7,26 +7,32 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
+        <a href="/" class="nav-link">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/about">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/users/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/users/registration">Registration</a>
+        <a href="/about" class="nav-link">About</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenulink">Clip Base</a>
-        <div class="dropdown-menu">
-          <a href="/clips" class="dropdown-item">Clips</a>
-          <a href="/clips/add" class="dropdown-item">Add Clip</a>
-        </div>
-      </li>
+      {{#if user}}
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenulink">Clip Base</a>
+          <div class="dropdown-menu">
+            <a href="/clips" class="dropdown-item">Clips</a>
+            <a href="/clips/add" class="dropdown-item">Add Clip</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="/users/logout" class="nav-link">Logout</a>
+        </li>
+      {{else}}
+        <li class="nav-item">
+          <a href="/users/login" class="nav-link">Login</a>
+        </li>
+        <li class="nav-item">
+          <a href="/users/registration" class="nav-link" >Registration</a>
+        </li>
+      {{/if}}
     </ul>
   </div>
 </nav>

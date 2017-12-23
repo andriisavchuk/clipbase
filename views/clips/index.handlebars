@@ -9,9 +9,9 @@
     <form method="post" action="/clips/{{id}}?_method=DELETE">
       <input type="hidden" name="_method" value="DELETE">
       {{!-- <input type="submit" class="btn btn-danger btn-block mt-2" value="Delete"> --}}
-      <button type="submit" class="btn btn-danger mt-3">Submit</button>
+      <button type="submit" class="btn btn-danger mt-3">Delete</button>
     </form>
   </div>
 {{else}}
-  <p>Sorry, there are no any data in ClipBase</p>
+  <h2>Sorry, there are no any data in ClipBase</h2>
 {{/each}}
