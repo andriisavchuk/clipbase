@@ -7,9 +7,9 @@ const {ensureAuthenticated} = require('../helpers/auth');
 require('../models/Clip');
 const Clip = mongoose.model('clips');
 
-// Clip Route
+// Clip Index Route
 router.get('/', ensureAuthenticated, (req, res) => {
-  Clip.find({})
+  Clip.find({user: req.user.id})
     .sort({date: 'desc'})
     .then(clips => {
       res.render('clips/index', {
@@ -29,14 +29,19 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
     _id: req.params.id
   })
   .then(clip => {
-    res.render('clips/edit', {
-      clip
-    })
+    if (clip.user != req.user.id) {
+      req.flash('error_msg', 'Not Authorized');
+      res.redirect('/clips');
+    } else {
+      res.render('clips/edit', {
+        clip: clip
+      });
+    }
   });
 });
 
 // Process Form
-router.post('/', (req, res) => {
+router.post('/', ensureAuthenticated, (req, res) => {
   let errors = [];
 
   if (!req.body.title) {
@@ -71,7 +76,8 @@ router.post('/', (req, res) => {
       description: req.body.description,
       style: req.body.style,
       director: req.body.director,
-      duration: req.body.duration
+      duration: req.body.duration,
+      user: req.user.id
     }
     new Clip(newClip)
       .save()
