@@ -1,13 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
+const {ensureAuthenticated} = require('../helpers/auth');
 
 // Load Clip Model
 require('../models/Clip');
 const Clip = mongoose.model('clips');
 
 // Clip Route
-router.get('/', (req, res) => {
+router.get('/', ensureAuthenticated, (req, res) => {
   Clip.find({})
     .sort({date: 'desc'})
     .then(clips => {
@@ -18,12 +19,12 @@ router.get('/', (req, res) => {
 });
 
 // Add Clip Form
-router.get('/add', (req, res) => {
+router.get('/add', ensureAuthenticated,  (req, res) => {
   res.render('clips/add');
 });
 
 // Edit Clip Form
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', ensureAuthenticated, (req, res) => {
   Clip.findOne({
     _id: req.params.id
   })
@@ -82,7 +83,7 @@ router.post('/', (req, res) => {
 });
 
 // Edit form process
-router.put('/:id', (req, res) => {
+router.put('/:id', ensureAuthenticated, (req, res) => {
   Clip.findOne({
     _id: req.params.id
   })
@@ -103,7 +104,7 @@ router.put('/:id', (req, res) => {
 });
 
 // Delete Clip
-router.delete('/:id', (req, res) => {
+router.delete('/:id', ensureAuthenticated, (req, res) => {
   Clip.remove({_id: req.params.id})
     .then(() => {
       req.flash('success_msg', 'Clip information removed');
