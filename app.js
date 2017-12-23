@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
-// const bodyParser = require('body-parser');
+const passport = require('passport');
 const mongoose = require('mongoose');
 
 // Set express application const
@@ -12,6 +12,9 @@ const app = express();
 // Load Routes
 const clips = require('./routes/clips');
 const users = require('./routes/users');
+
+// Passport Config
+require('./config/passport')(passport);
 
 // Map global promise
 mongoose.Promise = global.Promise;

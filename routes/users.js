@@ -18,6 +18,15 @@ router.get('/registration', (req, res) => {
   res.render('users/registration');
 });
 
+// Login Form POST
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/clips',
+    failureRedirect: '/users/lpgin',
+    failureFlash: true
+  })(req, res, next);
+});
+
 // Registration Form POST
 router.post('/registration', (req, res) => {
   let errors = [];
