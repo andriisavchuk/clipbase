@@ -16,11 +16,14 @@ const users = require('./routes/users');
 // Passport Config
 require('./config/passport')(passport);
 
+// DB Config
+const db = require('./config/db');
+
 // Map global promise
 mongoose.Promise = global.Promise;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost/clipbase', {
+mongoose.connect(db.mongoURI, {
   useMongoClient: true
 })
   .then(() => console.log('MongoDB Connected...'))
@@ -83,7 +86,7 @@ app.use('/clips', clips);
 app.use('/users', users);
 
 // Set Port
-const port = process.env.port || 3000;
+const port = process.env.port || 5000;
 
 // Listening of the requests
 app.listen(port, () => {
