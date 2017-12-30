@@ -86,7 +86,7 @@ app.use('/clips', clips);
 app.use('/users', users);
 
 // Set Port
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 
 // Listening of the requests
 app.listen(port, () => {
