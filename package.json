@@ -4,7 +4,7 @@
   "description": "nodejs practice application with CRUD functionality",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "author": "Andrii S",
   "license": "ISC",
