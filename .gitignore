@@ -13,8 +13,10 @@
 /tmp
 /out-tsc
 
+
 # dependencies
 /node_modules
+/config
 
 # IDEs and editors
 /.idea
